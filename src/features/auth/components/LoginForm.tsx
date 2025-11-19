@@ -27,6 +27,7 @@ import {
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { authClient } from '@/lib/auth-client'
+import Image from 'next/image'
 
 
 const loginSchema = z.object({
@@ -55,14 +56,18 @@ const LoginForm = () => {
       email: data.email,
       password: data.password,
 
-    }).then(() => {
+    }, {
 
-      toast.success('Logged in successfully!')
-      router.push('/')
+      onSuccess: () => {
 
-    }).catch((error) => {
+        toast.success('Login successfully!')
+        router.push('/')
+      },
+      onError: (error) => {
 
-      toast.error(`Login failed: ${error.message}`)
+        toast.error(`Login failed: ${error.error.message}`)
+      }
+
     })
 
   }
@@ -80,9 +85,11 @@ const LoginForm = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <Button variant="outline" className="w-full">
+              <Image src="/logo/google.svg" alt="Google Logo" width={20} height={20} className="mr-2 inline-block" />
               Continue with Google
             </Button>
             <Button variant="outline" className='w-full'>
+             <Image src="/logo/github.svg" alt="Google Logo" width={20} height={20} className="mr-2 inline-block" />
               Continue with GitHub
             </Button>
             <FormField

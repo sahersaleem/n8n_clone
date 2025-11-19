@@ -27,6 +27,7 @@ import {
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { authClient } from '@/lib/auth-client'
+import Image from 'next/image'
 
 
 const registerSchema = z.object({
@@ -66,7 +67,7 @@ const RegisterForm = () => {
         router.push('/')
       },
       onError: (error) => {
-        
+
         toast.error(`Registration failed: ${error.error.message}`)
       }
     }
@@ -89,9 +90,11 @@ const RegisterForm = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <Button variant="outline" className="w-full">
+              <Image src="/logo/google.svg" alt="Google Logo" width={20} height={20} className="mr-2 inline-block" />
               Continue with Google
             </Button>
             <Button variant="outline" className='w-full'>
+              <Image src="/logo/github.svg" alt="Google Logo" width={20} height={20} className="mr-2 inline-block" />
               Continue with GitHub
             </Button>
             <FormField
