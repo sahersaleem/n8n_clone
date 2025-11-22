@@ -7,7 +7,7 @@ import React from 'react'
 const Client = () => {
 
     const trpc = useTRPC()
-    const { data } = useSuspenseQuery(trpc.getUser.queryOptions())
+    const { data } = useSuspenseQuery(trpc.getWorkflow.queryOptions())
 
     return (
         <div>
