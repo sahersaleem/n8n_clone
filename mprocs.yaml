@@ -1,0 +1,14 @@
+procs:
+  inngest:
+    cmd:
+      - npx
+      - inngest-cli
+      - dev
+    # npx will always find the local binary → no more error 193
+
+  next:
+    cmd:
+      - npm
+      - run
+      - dev
+    # or you can also do: ["npx", "next", "dev"] – both work
