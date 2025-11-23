@@ -20,8 +20,11 @@ export default function Home() {
 
   //mutation to create workflow 
   const mutate = useMutation(trpc.createWorkflow.mutationOptions({
-    onSuccess() {
-      toast("Workflow creation queued")
+    onSuccess: () => {
+      toast.success("Workflow creation queued")
+    },
+    onError: () => {
+      toast.error("Something went wrong.")
     }
   }))
 
@@ -29,6 +32,9 @@ export default function Home() {
   const testAi = useMutation(trpc.useAI.mutationOptions({
     onSuccess() {
       toast("Text generating ququed!!")
+    },
+    onError: () => {
+      toast.error("Something went wrong.")
     }
   }))
   return (
