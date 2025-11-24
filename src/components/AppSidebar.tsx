@@ -24,6 +24,7 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { authClient } from '@/lib/auth-client'
+import { useHasActiveSubscription } from '@/features/subscription/hooks/use-subscription'
 
 const menuItems = [
     {
@@ -46,6 +47,11 @@ const menuItems = [
                 title: "Executions",
                 url: "/executions"
             },
+            {
+                icon: HistoryIcon,
+                title: "Subscriptions",
+                url: "/subscriptions"
+            },
 
 
 
@@ -56,6 +62,7 @@ const AppSidebar = () => {
 
     const router = useRouter();
     const pathname = usePathname();
+    const { isActiveUser: isActiveSubscription } = useHasActiveSubscription()
     return (
         <Sidebar collapsible='icon'>
             <SidebarHeader>
@@ -103,21 +110,25 @@ const AppSidebar = () => {
                 }
             </SidebarContent>
             <SidebarFooter>
-                <SidebarMenuItem>
-                    <SidebarMenuButton
-                        tooltip={"Upgrade to Pro"}
-                        className='gap-x-4 h-10 px-4'
-                        onClick={() => { }}
-                    >
-                        <StarIcon className='size-4' />
-                        <span>Upgrade to pro</span>
-                    </SidebarMenuButton>
-                </SidebarMenuItem>
+                {
+                    !isActiveSubscription &&
+                    <SidebarMenuItem>
+                        <SidebarMenuButton
+                            tooltip={"Upgrade to Pro"}
+                            className='gap-x-4 h-10 px-4'
+                            onClick={() => { authClient.checkout({ slug: "nodebase-pro" }) }}
+                        >
+                            <StarIcon className='size-4' />
+                            <span>Upgrade to pro</span>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                }
+
                 <SidebarMenuItem>
                     <SidebarMenuButton
                         tooltip={"Billing Portal"}
                         className='gap-x-4 h-10 px-4'
-                        onClick={() => { }}
+                        onClick={() => { authClient.customer.portal() }}
                     >
                         <CreditCardIcon className='size-4' />
                         <span>Billing Portal</span>
