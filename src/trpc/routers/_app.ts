@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createTRPCRouter, protectedProcedure } from "../init";
+import { createTRPCRouter, premiumProcedure, protectedProcedure } from "../init";
 import prisma from "@/lib/db";
 import { inngest } from "@/inngest/client";
 import { google } from "@ai-sdk/google";
@@ -8,7 +8,7 @@ import { TRPCError } from "@trpc/server";
 
 export const appRouter = createTRPCRouter({
   //use AI function calling thriugh inngest.
-  useAI: protectedProcedure.mutation(async ({ ctx }) => {
+  useAI: premiumProcedure.mutation(async ({ ctx }) => {
     await inngest.send({
       name: "execute.ai",
     });
