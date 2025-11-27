@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 
 const page = () => {
 
-    const trpc = useTRPC()
+    const trpc: any = useTRPC()
     const mutate = useMutation(trpc.useAI.mutationOptions({
         onSuccess: () => {
             toast.success("Job QUeued")
