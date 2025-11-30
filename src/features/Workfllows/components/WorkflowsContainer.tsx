@@ -1,5 +1,6 @@
 import { EntityContainer } from "@/components/EntityComponents"
 import { WorkflowHeader } from "./WorkflowHeader"
+import { WorkFlowPagination, WorkFlowSearch } from "./Workflows"
 
 export const WorkflowsContainer = (
     { children }: { children: React.ReactNode }
@@ -7,8 +8,8 @@ export const WorkflowsContainer = (
     return (
         <EntityContainer
             header={<WorkflowHeader />}
-            pagination={<></>}
-            search={<> </>}
+            pagination={<WorkFlowPagination />}
+            search={<WorkFlowSearch />}
 
         >
             {children}

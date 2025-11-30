@@ -5,10 +5,21 @@ import { ErrorBoundary } from 'react-error-boundary'
 import { HydrateClient } from '@/trpc/server'
 import { WorkflowsContainer } from '@/features/Workfllows/components/WorkflowsContainer'
 import WorkflowsList from '@/features/Workfllows/components/Workflows'
+import { SearchParams } from 'nuqs'
+import { workflowsParamsLoader } from '@/features/Workfllows/server/params-loader'
 
-const page = async () => {
+type Props = {
+  searchParams:Promise<SearchParams>
+}
+
+
+const page = async ({ searchParams } : Props) => {
+
   await requireAuth()
-  prefetchWorkflows();
+  const params = await workflowsParamsLoader(searchParams);
+  prefetchWorkflows(params);
+
+  
   return (
     <WorkflowsContainer>
       <HydrateClient>
