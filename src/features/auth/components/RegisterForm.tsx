@@ -70,12 +70,7 @@ const RegisterForm = () => {
 
         toast.error(`Registration failed: ${error.error.message}`)
       }
-    }
-
-    )
-
-
-  }
+    })}
 
   const isPending = form.formState.isSubmitting;
 
