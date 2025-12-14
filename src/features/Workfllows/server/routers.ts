@@ -23,14 +23,14 @@ export const workflowsRouter = createTRPCRouter({
   deleteWorkflow: protectedProcedure
     .input(
       z.object({
-        userId: z.string(),
+        id: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
       return prisma.workflow.delete({
         where: {
           userId: ctx.session.user.id,
-          id: input.userId,
+          id: input.id,
         },
       });
     }),

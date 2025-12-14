@@ -21,7 +21,6 @@ const useUpgradeModal = () => {
     }
 
     const modal = <UpgradeModal open={isOpen} setOpen={setIsOpen} />
-
     return { handleError, modal }
 }
 
